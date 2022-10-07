@@ -63,8 +63,8 @@
 <script src="./bustub-wasm-bpt-printer.js"></script>
 
 <script type="text/javascript">
-    const BUSTUB_PUBLIC_VERSION_VAR = "01614c7"
-    const BUSTUB_PRIVATE_VERSION_VAR = "8d51ee4-dirty"
+    const BUSTUB_PUBLIC_VERSION_VAR = "f134f54"
+    const BUSTUB_PRIVATE_VERSION_VAR = "0454393-dirty"
     const viz = new Viz()
 
     Module['onRuntimeInitialized'] = function () {
@@ -123,7 +123,7 @@ BusTub is a relational database management system built at Carnegie Mellon Unive
 ${helpMessage}
 This is BusTub reference solution running in your browser. Solution Version: ${BUSTUB_PRIVATE_VERSION_VAR}, BusTub Version: ${BUSTUB_PUBLIC_VERSION_VAR}.
 `,
-            prompt: () => initialized ? "[[b;;]printer> ]" : "internal_max_size and leaf_max_size? >"
+            prompt: () => initialized ? "[[b;;]printer> ]" : "internal_max_size and leaf_max_size? > "
         })
     })
 </script>
