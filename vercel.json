@@ -1,5 +1,11 @@
 {
     "github": {
         "silent": true
-    }
+    },
+    "redirects": [
+        {
+            "source": "/",
+            "destination": "https://bustub.skyzh.dev/bpt-printer/"
+        }
+    ]
 }
