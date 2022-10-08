@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>BusTub Shell</title>
+    <title>BusTub B+Tree Printer</title>
     <!-- jQuery -->
     <script src="https://unpkg.com/jquery@3.x.x/dist/jquery.min.js"></script>
     <!-- jQuery Terminal -->
@@ -62,7 +62,7 @@
     }
 
     .svg-wrapper {
-        width: 50%;
+        width: 80%;
         overflow-x: hidden;
         background-color: white;
         border: 1px solid grey;
@@ -72,8 +72,8 @@
 <script src="./bustub-wasm-bpt-printer.js"></script>
 
 <script type="text/javascript">
-    const BUSTUB_PUBLIC_VERSION_VAR = "f134f54"
-    const BUSTUB_PRIVATE_VERSION_VAR = "0454393-dirty"
+    const BUSTUB_PUBLIC_VERSION_VAR = "2899627"
+    const BUSTUB_PRIVATE_VERSION_VAR = "4514317-dirty"
     const viz = new Viz()
 
     Module['onRuntimeInitialized'] = function () {
@@ -114,8 +114,12 @@
             } else {
                 if (!initialized) {
                     const [x, y] = line.split(" ")
-                    initialize(parseInt(x), parseInt(y))
-                    initialized = true
+                    const [px, py] = [parseInt(x), parseInt(y)]
+                    if (px >= 2 && py >= 3) {
+                        initialize(px, py)
+                        this.echo(`leaf_max_size=${px}, internal_max_size=${py}`)
+                        initialized = true
+                    }
                 } else {
                     const [retCode, result] = executeQuery(line)
                     if (retCode == 0) {
@@ -128,7 +132,9 @@
                             div.appendChild(svgXml)
                             this.echo(div, { raw: true })
                             svgPanZoom(`#${id}`)
+                            $(`#${id}`).width("100%")
                             document.querySelector(`#${id}`).addEventListener('wheel', preventScroll, { passive: false });
+                            this.echo("")
                         })
                     }
                     if (retCode == 1) {
@@ -148,7 +154,7 @@ BusTub is a relational database management system built at Carnegie Mellon Unive
 ${helpMessage}
 This is BusTub reference solution running in your browser. Solution Version: ${BUSTUB_PRIVATE_VERSION_VAR}, BusTub Version: ${BUSTUB_PUBLIC_VERSION_VAR}.
 `,
-            prompt: () => initialized ? "[[b;;]printer> ]" : "leaf_max_size and internal_max_size? > "
+            prompt: () => initialized ? "[[b;;]printer> ]" : "leaf_max_size and internal_max_size? (e.g., 3 3) "
         })
     })
 </script>
